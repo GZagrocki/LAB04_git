@@ -14,12 +14,18 @@ public class DodajWpis extends AppCompatActivity {
         setContentView(R.layout.activity_dodaj_wpis);
     }
 
-    public void wyslij(View view){
+    public void wyslij(View view)
+    {
         EditText kontrolka = (EditText)findViewById(R.id.editText);
-        String pole = kontrolka.getText().toString();
+        String  pole = kontrolka.getText().toString();
         Intent intencja = new Intent();
         intencja.putExtra("wpis", pole);
         setResult(RESULT_OK, intencja);
         finish();
     }
+
+
+
+
 }
+
