@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LAB04_git</string>
+    <string name="dodaj">Dodaj</string>
+    <string name="wpisznazwe">WpiszNazwe</string>
 </resources>
