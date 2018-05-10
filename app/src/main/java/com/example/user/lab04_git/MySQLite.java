@@ -45,12 +45,14 @@ public class MySQLite extends SQLiteOpenHelper {
 
     public void usun(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete("animals", "_ id = ?", new String[] {id});
+
+        db.delete("animals", "_id = ?", new String[] { id });
         db.close();
     }
 
     public int aktualizuj(Animal zwierz) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db =
+                this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("gatunek", zwierz.getGatunek());
         values.put("kolor", zwierz.getKolor());
@@ -61,27 +63,27 @@ public class MySQLite extends SQLiteOpenHelper {
         return i;
     }
 
-
-
-    public Animal pobierz(int _id){
-        SQLiteDatabase db = getReadableDatabase();
-
+    public Animal pobierz(int id){
+        SQLiteDatabase db =
+                this.getReadableDatabase();
         Cursor cursor = db.query("animals", //a. table name
-                 new String[] {"gatunek", "kolor", "wielkosc", "opis"}, //b. column names
-                "_id = ?", // c.selections
-                new String[] { String.valueOf(_id) }, //d. selections args
-                null, //e .group by
+                new String[] { "_id",
+                        "gatunek", "kolor", "wielkosc", "opis" }, // b.column names
+                "_id = ?", // c. selections
+                new String[] {
+                        String.valueOf(id) }, // d. selections args
+                null, // e. group by
                 null, // f. having
                 null, // g. order by
                 null); // h. limit
-
-        if(cursor != null)
+        if (cursor != null)
             cursor.moveToFirst();
+        Animal zwierz = new
+                Animal(cursor.getString(1), cursor.getString(2),
+                cursor.getFloat(3), cursor.getString(4));
 
-        Animal zwierz = new Animal(cursor.getString(1), cursor.getString(2), cursor.getFloat(3),cursor.getString(4));
-
-        zwierz.setId(Integer.parseInt(cursor.getString(0)));
-
+        zwierz.setId(Integer.parseInt(cursor.getString(0))
+        );
         return zwierz;
     }
 
