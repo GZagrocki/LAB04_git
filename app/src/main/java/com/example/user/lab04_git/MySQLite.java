@@ -43,22 +43,25 @@ public class MySQLite extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int aktualizuj(Animal zwierz){
-
+    public void usun(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("animals", "_ id = ?", new String[] {id});
+        db.close();
+    }
 
+    public int aktualizuj(Animal zwierz) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("gatunek", zwierz.getGatunek());
         values.put("kolor", zwierz.getKolor());
         values.put("wielkosc", zwierz.getWielkosc());
         values.put("opis", zwierz.getOpis());
-
         int i = db.update("animals", values, "_id = ?", new String[]{String.valueOf(zwierz.getId())});
-
         db.close();
-
         return i;
     }
+
+
 
     public Animal pobierz(int _id){
         SQLiteDatabase db = getReadableDatabase();
